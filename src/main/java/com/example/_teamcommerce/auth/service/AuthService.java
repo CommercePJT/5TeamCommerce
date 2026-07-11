@@ -30,8 +30,8 @@ public class AuthService {
         Admin admin = new Admin(
                 request.getName(),
                 request.getEmail(),
-                request.getPassword(),
-                request.getPhone());
+                request.getPhone(),
+                request.getPassword());
 
         // 객체 저장
         Admin savedAdmin = adminRepository.save(admin);
