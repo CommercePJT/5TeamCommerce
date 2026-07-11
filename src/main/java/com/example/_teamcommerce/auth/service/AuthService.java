@@ -28,13 +28,12 @@ public class AuthService {
 
         // admin 객체 생성
         Admin admin = new Admin(
-                request.getName(),
                 request.getEmail(),
-                request.getPhone(),
-                request.getStatus());
+                request.getPassword(),
+                request.getPhone());
 
         // 객체 저장
-        Admin savedAdmin = AdminRepository.save(admin);
+        Admin savedAdmin = adminRepository.save(admin);
 
         // 객체 반환
         return new SignupAdminResponse(
