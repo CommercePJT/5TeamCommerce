@@ -28,6 +28,7 @@ public class AuthService {
 
         // admin 객체 생성
         Admin admin = new Admin(
+                request.getName(),
                 request.getEmail(),
                 request.getPassword(),
                 request.getPhone());
@@ -55,7 +56,7 @@ public class AuthService {
                 () -> new IllegalArgumentException("존재하지 않은 관리자입니다."));
 
         // 비밀번호 확인
-        if (!admin.getPassword().equals(request.getPassword)) {
+        if (!admin.getPassword().equals(request.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치 하지 않습니다.");
         }
 

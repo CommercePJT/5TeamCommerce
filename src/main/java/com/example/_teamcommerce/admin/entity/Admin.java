@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,13 +24,22 @@ public class Admin extends BaseEntity {
     @NotBlank(message = "이름은 필수 입력값입니다.")
     private String name;
 
-    @NotBlank(message = "이메일은 필수 입력값입니다.")
+    @NotBlank(message = "이메은 필수 입력값입니다.")
     @Email
     private String email;
 
     @Pattern(regexp = "^010-\\d{4}-\\d{4}$")
     private String phone;
 
+    @Size(min = 8)
+    private String password;
+
     private String status;
 
+    public Admin(String name, String email, String phone, String password) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 }
