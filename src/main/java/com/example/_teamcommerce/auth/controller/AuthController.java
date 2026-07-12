@@ -17,17 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/admins")
 
 public class AuthController {
 
     private final AuthService authService;
-    // 회원가입
+
+    // 관리자 회원가입 (가입 신청 -> 승인 대기 상태로 생성됌)
     @PostMapping("/signup")
     public ResponseEntity<SignupAdminResponse> signup(@Valid @RequestBody SignupAdminRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.signup(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.signup(request));  // 201 C
     }
 
+    // 관리자 로그인
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginAdminRequest request,
                                       HttpServletRequest servletRequest){
@@ -44,7 +46,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    // 로그아웃
+    // 관리자 로그아웃
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest servletRequest) {
 

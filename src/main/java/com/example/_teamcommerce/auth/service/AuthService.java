@@ -5,7 +5,10 @@ import com.example._teamcommerce.admin.repository.AdminRepository;
 import com.example._teamcommerce.auth.dto.request.LoginAdminRequest;
 import com.example._teamcommerce.auth.dto.request.SignupAdminRequest;
 import com.example._teamcommerce.auth.dto.response.SignupAdminResponse;
+import com.example._teamcommerce.auth.exception.CustomException;
+import com.example._teamcommerce.auth.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,37 +17,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class AuthService {
 
-    // 회원가입 = admin 생성
     private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    // 회원가입
+    // 회원가입 = admin 생성
     @Transactional
     public SignupAdminResponse signup(SignupAdminRequest request) {
 
         // 이메일 중복확인
-        if (adminRepository.existsByEmail(request.getEmail())) {
+        validateDuplicateEmail(request.getEmail());
+        /* if (adminRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("다른 관리자가 사용 중인 이메일 입니다.");
-        }
+        } */
 
-        // admin 객체 생성
-        Admin admin = new Admin(
-                request.getName(),
-                request.getEmail(),
-                request.getPhone(),
-                request.getPassword());
+        // 사용자가 입력한 원본 비밀번호를 암호화
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
 
-        // 객체 저장
+        // 관리자(Admin) 객체 생성 (상태(status)는 생성자에서 자동으로 PENDING)
+        Admin admin = Admin.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .password(encodedPassword)
+                .phone(request.getPhone())
+                .role(request.getRole())
+                .build();
+
+        // 생성한 관리자 정보를 DB에 저장
         Admin savedAdmin = adminRepository.save(admin);
 
-        // 객체 반환
-        return new SignupAdminResponse(
-                savedAdmin.getId(),
-                savedAdmin.getName(),
-                savedAdmin.getEmail(),
-                savedAdmin.getPhone(),
-                savedAdmin.getStatus(),
-                savedAdmin.getCreatedAt());
-
+        // 저장된 Admin Entity를 Response DTO로 변환하여 반환
+        return SignupAdminResponse.from(savedAdmin);
     }
 
     // 로그인
@@ -65,5 +67,12 @@ public class AuthService {
 
     }
 
+    // 이메일 중복 검사
+    private void validateDuplicateEmail(String email) {
 
+        // 이미 존재하는 이메일이면 예외 발생
+        if (adminRepository.existsByEmail(email)) {
+            throw new CustomException(ErrorCode.DUPLICATE_EMAIL);
+        }
+    }
 }
