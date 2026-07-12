@@ -12,6 +12,12 @@ public enum ErrorCode {
             HttpStatus.CONFLICT,
             "ADMIN_EMAIL_DUPLICATED",
             "이미 사용중인 이메일입니다."
+    ),
+
+    INVALID_INPUT(
+            HttpStatus.BAD_REQUEST,
+            "INVALID_INPUT",
+            "입력값이 올바르지 않습니다."
     );
 
     private final HttpStatus status;
