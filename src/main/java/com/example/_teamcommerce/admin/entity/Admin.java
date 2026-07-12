@@ -1,13 +1,9 @@
 package com.example._teamcommerce.admin.entity;
 
 import com.example._teamcommerce.common.entity.BaseEntity;
-import com.example._teamcommerce.common.type.AdminRole;
-import com.example._teamcommerce.common.type.AdminStatus;
+import com.example._teamcommerce.admin.type.AdminRole;
+import com.example._teamcommerce.admin.type.AdminStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

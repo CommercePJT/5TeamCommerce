@@ -1,4 +1,4 @@
-package com.example._teamcommerce.common.type;
+package com.example._teamcommerce.admin.type;
 
 public enum AdminStatus {
 

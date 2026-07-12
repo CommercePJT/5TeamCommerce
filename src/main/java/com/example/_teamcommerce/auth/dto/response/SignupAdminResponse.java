@@ -1,8 +1,8 @@
 package com.example._teamcommerce.auth.dto.response;
 
 import com.example._teamcommerce.admin.entity.Admin;
-import com.example._teamcommerce.common.type.AdminRole;
-import com.example._teamcommerce.common.type.AdminStatus;
+import com.example._teamcommerce.admin.type.AdminRole;
+import com.example._teamcommerce.admin.type.AdminStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
 package com.example._teamcommerce.auth.dto.request;
 
-import com.example._teamcommerce.common.type.AdminRole;
+import com.example._teamcommerce.admin.type.AdminRole;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 
