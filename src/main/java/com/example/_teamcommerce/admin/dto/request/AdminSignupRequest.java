@@ -2,10 +2,7 @@ package com.example._teamcommerce.admin.dto.request;
 
 import com.example._teamcommerce.admin.entity.Admin;
 import com.example._teamcommerce.admin.type.AdminRole;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,6 +33,6 @@ public class AdminSignupRequest {
     private String phone;
 
     // 역할은 반드시 선택해야 함
-    @NotBlank(message = "관리자 역할은 필수입니다.")
+    @NotNull(message = "관리자 역할은 필수입니다.")
     private AdminRole role;
 }
