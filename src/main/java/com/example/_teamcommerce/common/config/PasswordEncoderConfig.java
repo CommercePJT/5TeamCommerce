@@ -1,4 +1,4 @@
-package com.example._teamcommerce.auth.config;
+package com.example._teamcommerce.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

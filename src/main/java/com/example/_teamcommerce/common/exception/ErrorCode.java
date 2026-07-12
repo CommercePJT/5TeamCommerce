@@ -1,4 +1,4 @@
-package com.example._teamcommerce.auth.exception;
+package com.example._teamcommerce.common.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
